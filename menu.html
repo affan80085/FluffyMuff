@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - FluffyMuff!</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Basic styling for modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            overflow-y: auto;
+            max-height: 80vh;
+        }
+        .modal-content h3 {
+            margin-top: 0;
+        }
+        .modal-content label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        .modal-content input, 
+        .modal-content select, 
+        .modal-content textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .modal-content button {
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .modal-content button.close {
+            background-color: #f44336;
+        }
+        .qr-code {
+            display: none;
+            margin: 10px 0;
+            text-align: center;
+        }
+        .qr-code img {
+            max-width: 100%;
+            height: auto;
+        }
+        .credit-card-details {
+            display: none;
+        }
+        .confirmation-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .confirmation-content {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            overflow-y: auto;
+        }
+        .confirmation-content h3 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="logo">
+            <img src="your-logo-path.jpg" alt="FluffyMuff Logo" style="border-radius: 50%;">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+		<li><a href="gallery.html">Photo Gallery</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Menu Section -->
+    <section id="menu">
+        <h2>Our Menu</h2>
+        <div class="menu-items-container" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
+            <!-- Menu Item 1 -->
+            <div class="menu-item">
+                <img src="https://customcmykboxes.co.uk/public/product/pastry-box3.webp" alt="Single Muffin">
+                <h3>Single Muffin</h3>
+                <p>Delicious single muffin, perfect for a quick snack.</p>
+                <p><strong>Price: 50 PHP</strong></p>
+                <button class="order-now" data-item="Single Muffin" data-price="50">Order Now</button>
+            </div>
+
+            <!-- Menu Item 2 -->
+            <div class="menu-item">
+                <img src="https://i.pinimg.com/736x/54/65/d4/5465d4cf3094889b5564b299407072e2.jpg" alt="Combo Muffin">
+                <h3>Combo Muffin</h3>
+                <p>A perfect combination of muffins for sharing.</p>
+                <p><strong>Price: 200 PHP</strong></p>
+                <button class="order-now" data-item="Combo Muffin" data-price="200">Order Now</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal for Order Form -->
+    <div class="modal" id="orderModal">
+        <div class="modal-content">
+            <h3>Place Your Order</h3>
+            <form id="orderForm">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+
+                <fieldset>
+                    <legend>Select Items</legend>
+                    <label><input type="checkbox" class="item-select" data-item="Single Muffin" data-price="50"> Single Muffin (50 PHP)</label>
+                    <label for="single-muffin-qty">Quantity:</label>
+                    <input type="number" id="single-muffin-qty" name="single-muffin-qty" min="1" value="1">
+
+                    <label><input type="checkbox" class="item-select" data-item="Combo Muffin" data-price="200"> Combo Muffin (200 PHP)</label>
+                    <label for="combo-muffin-qty">Quantity:</label>
+                    <input type="number" id="combo-muffin-qty" name="combo-muffin-qty" min="1" value="1">
+                </fieldset>
+
+                <label for="total">Total (PHP)</label>
+                <input type="text" id="total" name="total" readonly>
+
+                <label for="address">Address</label>
+                <textarea id="address" name="address" rows="3" required></textarea>
+
+                <label for="payment">Mode of Payment</label>
+                <select id="payment" name="payment">
+                    <option value="credit-card">Credit Card</option>
+                    <option value="paypal">PayPal</option>
+                    <option value="gcash">GCash</option>
+                    <option value="cash">Cash on Delivery</option>
+                </select>
+
+                <label for="payment-id">Payment ID</label>
+                <input type="text" id="payment-id" name="payment-id" placeholder="Enter Payment ID (if applicable)">
+
+                <div class="qr-code" id="qrCode">
+                    <img src="QR.jpeg" alt="Payment QR Code">
+                </div>
+
+                <div class="credit-card-details" id="creditCardDetails">
+                    <label for="card-number">Card Number</label>
+                    <input type="text" id="card-number" name="card-number" placeholder="1234 5678 9012 3456">
+
+                    <label for="expiry-date">Expiration Date</label>
+                    <input type="text" id="expiry-date" name="expiry-date" placeholder="MM/YY">
+
+                    <label for="cvv">CVV</label>
+                    <input type="text" id="cvv" name="cvv" placeholder="123">
+                </div>
+
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="3"></textarea>
+
+                <button type="submit">Submit</button>
+                <button type="button" class="close">Close</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="confirmation-modal" id="confirmationModal">
+        <div class="confirmation-content">
+            <h3>Receipt</h3>
+            <p><strong>Confirmation Code:</strong> <span id="confirmationCode"></span></p>
+            <p><strong>Name:</strong> <span id="nameConfirmation"></span></p>
+            <p><strong>Address:</strong> <span id="addressConfirmation"></span></p>
+            <p><strong>Payment Method:</strong> <span id="paymentConfirmation"></span></p>
+            <p><strong>Total:</strong> <span id="totalConfirmation"></span> PHP</p>
+            <h4>Items Ordered:</h4>
+            <ul id="itemsConfirmation"></ul>
+            <p><strong>Message:</strong> <span id="messageConfirmation"></span></p>
+            <p><strong>Note:</strong> Screenshot it</p>
+            <button id="confirmButton">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Function to open the order modal when "Order Now" is clicked
+        const orderButtons = document.querySelectorAll('.order-now');
+        const orderModal = document.getElementById('orderModal');
+        const closeModalButton = orderModal.querySelector('.close');
+        
+        orderButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const itemName = button.getAttribute('data-item');
+                const itemPrice = button.getAttribute('data-price');
+                const quantityInput = orderModal.querySelector(`#${itemName.toLowerCase().replace(' ', '-')}-qty`);
+                
+                // Set initial total based on item price and quantity
+                document.getElementById('total').value = itemPrice;
+
+                quantityInput.disabled = false;
+                quantityInput.value = 1;
+
+                orderModal.style.display = 'flex';
+                updateTotal();
+            });
+        });
+
+        // Close the modal when the close button is clicked
+        closeModalButton.addEventListener('click', () => {
+            orderModal.style.display = 'none';
+        });
+
+        // Function to update the total based on selected items and quantities
+        function updateTotal() {
+            let total = 0;
+            const selectedItems = document.querySelectorAll('.item-select:checked');
+            selectedItems.forEach(item => {
+                const itemPrice = parseInt(item.getAttribute('data-price'));
+                const itemName = item.getAttribute('data-item');
+                const itemQty = document.querySelector(`#${itemName.toLowerCase().replace(' ', '-')}-qty`).value;
+
+                total += itemPrice * itemQty;
+            });
+
+            document.getElementById('total').value = total;
+
+            // Display QR for PayPal and GCash, credit card details for credit card
+            const paymentMethod = document.getElementById('payment').value;
+            const qrCode = document.getElementById('qrCode');
+            const creditCardDetails = document.getElementById('creditCardDetails');
+
+            if (paymentMethod === 'paypal' || paymentMethod === 'gcash') {
+                qrCode.style.display = 'block';
+            } else {
+                qrCode.style.display = 'none';
+            }
+
+            if (paymentMethod === 'credit-card') {
+                creditCardDetails.style.display = 'block';
+            } else {
+                creditCardDetails.style.display = 'none';
+            }
+        }
+
+        // Update total when quantity is changed
+        document.getElementById('orderForm').addEventListener('change', updateTotal);
+
+        // Generate confirmation code and display receipt
+        document.getElementById('orderForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Generate a unique confirmation code
+            const confirmationCode = 'ORD' + Math.floor(Math.random() * 1000000);
+
+            // Populate confirmation modal with order details
+            document.getElementById('confirmationCode').innerText = confirmationCode;
+            document.getElementById('nameConfirmation').innerText = document.getElementById('name').value;
+            document.getElementById('addressConfirmation').innerText = document.getElementById('address').value;
+            document.getElementById('paymentConfirmation').innerText = document.getElementById('payment').value;
+            document.getElementById('totalConfirmation').innerText = document.getElementById('total').value;
+
+            const itemsConfirmation = document.getElementById('itemsConfirmation');
+            itemsConfirmation.innerHTML = '';
+            const selectedItems = document.querySelectorAll('.item-select:checked');
+            selectedItems.forEach(item => {
+                const itemName = item.getAttribute('data-item');
+                const itemQty = document.querySelector(`#${itemName.toLowerCase().replace(' ', '-')}-qty`).value;
+                const li = document.createElement('li');
+                li.textContent = `${itemName} x ${itemQty}`;
+                itemsConfirmation.appendChild(li);
+            });
+
+            document.getElementById('messageConfirmation').innerText = document.getElementById('message').value;
+
+            // Show the confirmation modal
+            document.getElementById('confirmationModal').style.display = 'flex';
+
+            // Close the order modal
+            orderModal.style.display = 'none';
+        });
+
+        // Close confirmation modal when confirm button is clicked
+        document.getElementById('confirmButton').addEventListener('click', () => {
+            document.getElementById('confirmationModal').style.display = 'none';
+        });
+    </script>
+
+</body>
+</html>

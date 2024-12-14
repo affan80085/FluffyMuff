@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FluffyMuff! - Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #ff6f61;
+            color: white;
+            padding: 10px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar .logo img {
+            height: 50px;
+            border-radius: 100%;
+        }
+
+        .navbar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .navbar ul li {
+            margin: 0 15px;
+        }
+
+        .navbar ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .navbar .social-icons img {
+            height: 24px;
+            margin-left: 10px;
+        }
+
+        /* Gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            padding: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            transform: rotate(calc(5deg * (random() - 0.5))); /* Randomized rotation */
+        }
+
+        .gallery-item img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            position: relative;
+            background: #fff;
+            border-radius: 8px;
+            max-width: 90%;
+            max-height: 90%;
+            overflow: hidden;
+        }
+
+        .modal-content img {
+            display: block;
+            width: 100%;
+        }
+
+        /* Static Navigation Buttons */
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 50%;
+            z-index: 10;
+        }
+
+        .modal-nav.prev {
+            left: 10px;
+            transform: translateY(-50%) rotate(10deg);
+        }
+
+        .modal-nav.next {
+            right: 10px;
+            transform: translateY(-50%) rotate(-10deg);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff5e57;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+            z-index: 20;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #ff6f61;
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            background-color: #ff6f61;
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+
+        .hero button {
+            background-color: #fff;
+            color: #ff6f61;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .hero button:hover {
+            background-color: #ff5a47;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="logo">
+            <img src="your-logo-path.jpg" alt="FluffyMuff Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="gallery.html">Photo Gallery</a></li>
+            </ul>
+        </nav>
+        <div class="social-icons">
+            <a href="https://www.instagram.com/_an_deeeengg_" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+            </a>
+            <a href="https://www.facebook.com/andrea.hernacio" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section (Optional) -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>FluffyMuff!</h1>
+            <p>"Fluffed with love for every bite!"</p>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <div class="gallery" id="galleryContainer"></div>
+
+    <!-- Modal -->
+    <div class="modal" id="imageModal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeModal">&times;</button>
+            <button class="modal-nav prev" id="prevImage">&#9664;</button>
+            <img id="modalImage" src="" alt="Image">
+            <button class="modal-nav next" id="nextImage">&#9654;</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 FluffyMuff. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Create and insert gallery items dynamically
+        const galleryContainer = document.getElementById("galleryContainer");
+        for (let i = 1; i <= 25; i++) {
+            const galleryItem = document.createElement("div");
+            galleryItem.classList.add("gallery-item");
+            const img = document.createElement("img");
+            img.src = `images/${i}.jpg`;
+            img.alt = `Image ${i}`;
+            img.dataset.index = i;
+            galleryItem.appendChild(img);
+            galleryContainer.appendChild(galleryItem);
+        }
+
+        // Modal functionality
+        let currentImageIndex = null;
+
+        const modal = document.getElementById("imageModal");
+        const modalImage = document.getElementById("modalImage");
+        const closeModal = document.getElementById("closeModal");
+        const prevImage = document.getElementById("prevImage");
+        const nextImage = document.getElementById("nextImage");
+
+        // Open modal
+        document.querySelectorAll(".gallery-item").forEach(item => {
+            item.addEventListener("click", function() {
+                const index = parseInt(this.querySelector("img").dataset.index);
+                currentImageIndex = index;
+                modalImage.src = `images/${index}.jpg`;
+                modal.style.display = "flex";
+            });
+        });
+
+        // Close modal
+        closeModal.addEventListener("click", () => {
+            modal.style.display = "none";
+        });
+
+        // Navigate images
+        prevImage.addEventListener("click", () => {
+            if (currentImageIndex > 1) {
+                currentImageIndex--;
+                modalImage.src = `images/${currentImageIndex}.jpg`;
+            }
+        });
+
+        nextImage.addEventListener("click", () => {
+            if (currentImageIndex < 25) {
+                currentImageIndex++;
+                modalImage.src = `images/${currentImageIndex}.jpg`;
+            }
+        });
+
+        // Close modal when clicking outside of content
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) {
+                modal.style.display = "none";
+            }
+        });
+    </script>
+</body>
+</html>

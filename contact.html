@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - FluffyMuff!</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <style>
+        body {            
+font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #f4f4f4;
+        }
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        nav ul li {
+            margin: 0 10px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+        }
+        .social-icons img {
+            width: 30px;
+            height: 30px;
+            margin: 0 5px;
+        }
+        section {
+            padding: 20px;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 10px;
+        }
+        .footer-content div {
+            max-width: 200px;
+        }
+        .testimonial {
+            background-color: #f9f9f9;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        #back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            cursor: pointer;
+            display: none;
+        }
+        #back-to-top:hover {
+            background-color: #555;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="logo">
+            <img src="your-logo-path.jpg" alt="FluffyMuff Logo" style="border-radius: 50%;">
+        </div>
+        <nav aria-label="Main Navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+		<li><a href="gallery.html">Photo Gallery</a></li>
+            </ul>
+        </nav>
+        <div class="social-icons">
+            <a href="https://www.instagram.com/_an_deeeengg_" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+            </a>
+            <a href="https://www.facebook.com/andrea.hernacio" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">
+            </a>
+        </div>
+    </header>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <div class="message">
+            <h3>Message Us</h3>
+            <p>If you have any questions or need assistance, feel free to reach out to us at <strong>contact@siowow.com</strong>. We're happy to help!</p>
+        </div>
+        <div class="form-container">
+            <h3>Contact Form</h3>
+            <form action="send_email.php" method="POST">
+                <input type="text" name="name" placeholder="Your Name" required><br>
+                <input type="email" name="email" placeholder="Your Email" required><br>
+                <textarea name="message" placeholder="Your Message" rows="5" required></textarea><br>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials">
+        <h2>What Our Customers Say</h2>
+        <div class="testimonial">
+            <p>"FluffyMuff's treats are simply the best! Highly recommend to anyone looking for a sweet indulgence."</p>
+            <h4>- Jane Doe</h4>
+        </div>
+        <div class="testimonial">
+            <p>"Amazing service and delicious menu! I'll be coming back for more."</p>
+            <h4>- John Smith</h4>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section id="location">
+        <h2>Find Us</h2>
+        <iframe 
+            src="https://www.google.com/maps/embed?pb=YOUR_GOOGLE_MAP_EMBED_CODE"
+            width="600"
+            height="450"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy">
+        </iframe>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div>
+                <h4>Contact Information</h4>
+                <p>Email: <a href="mailto:contact@siowow.com">danicavmanares@gmail.com</a></p>
+                <p>Phone: +63 9158287750</p>
+            </div>
+            <div>
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <p>&copy; 2024 SioWowww! All Rights Reserved.</p>
+    </footer>
+
+    <!-- Back-to-Top Button -->
+    <button id="back-to-top" onclick="scrollToTop()">&#8679;</button>
+    <script>
+        window.addEventListener('scroll', function () {
+            const backToTop = document.getElementById('back-to-top');
+            if (window.scrollY > 200) {
+                backToTop.style.display = 'block';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
+</body>
+</html>

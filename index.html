@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FluffyMuff! - Home</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="logo">
+            <img src="your-logo-path.jpg" alt="FluffyMuff Logo" style="border-radius: 100%;">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+		<li><a href="gallery.html">Photo Gallery</a></li>
+            </ul>
+        </nav>
+        
+        <!-- Search Bar -->
+        <div class="search">
+            <input type="text" placeholder="Search for muffins..." id="searchInput">
+            <button onclick="searchFunction()">Search</button>
+        </div>
+
+        <!-- Social Media Icons -->
+        <div class="social-icons">
+            <!-- Instagram Link -->
+            <a href="https://www.instagram.com/_an_deeeengg_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" class="social-icon">
+            </a>
+            
+            <!-- Facebook Link -->
+            <a href="https://www.facebook.com/andrea.hernacio" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" class="social-icon">
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>FluffyMuff!</h1>
+            <p>"Fluffed with love for every bite!"</p>
+            <button id="orderNowBtn">ORDER NOW</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 SioWowww! All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById('orderNowBtn').addEventListener('click', () => {
+            window.location.href = "menu.html"; // Navigate to Menu page
+        });
+
+        // Example search function (for demonstration)
+        function searchFunction() {
+            const searchQuery = document.getElementById('searchInput').value;
+            if (searchQuery) {
+                alert('You searched for: ' + searchQuery); // You can implement a real search later
+            }
+        }
+    </script>
+</body>
+</html>
+	
